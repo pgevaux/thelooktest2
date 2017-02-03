@@ -52,7 +52,11 @@ view: users {
   }
   dimension: male {
     type: yesno
-    sql: ${TABLE}.gender like 'Male' ;;
+    sql: ${TABLE}.gender like 'm' ;;
+  }
+  dimension: female {
+    type: yesno
+    sql: ${TABLE}.gender like 'f' ;;
   }
 
   dimension: last_name {
@@ -76,6 +80,21 @@ view: users {
 
   measure: count {
     type: count
+    drill_fields: [detail*]
+  }
+  measure: min_age {
+    type: min
+    sql: ${TABLE}.age ;;
+    drill_fields: [detail*]
+  }
+  measure: max_age {
+    type: max
+    sql: ${TABLE}.age ;;
+    drill_fields: [detail*]
+  }
+  measure: avg_age {
+    type: average
+    sql: ${TABLE}.age ;;
     drill_fields: [detail*]
   }
 
