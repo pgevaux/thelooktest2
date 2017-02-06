@@ -51,6 +51,11 @@ view: users {
     sql: ${TABLE}.gender ;;
     drill_fields: [city,age,state]
   }
+  dimension: genderfull {
+    type: string
+    sql: case when gender = "f" then "Female" else "Male"end ;;
+    drill_fields: [city,age,state]
+  }
   dimension: male {
     type: yesno
     sql: ${TABLE}.gender like 'm' ;;

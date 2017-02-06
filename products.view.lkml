@@ -47,7 +47,10 @@ view: products {
     suggest_dimension: department
   }
   dimension: product_type {
-#      SQL: CASE WHEN {% condition selected_department %} '' {% endcondition %} THEN ${department} WHEN {% condition selected_department %} ${department} {% endcondition %} THEN ${category} END;;
+      sql: CASE
+      WHEN {% condition selected_department %} '' {% endcondition %} THEN ${department}
+      WHEN {% condition selected_department %} ${department} {% endcondition %}
+      THEN ${category} END;;
   }
 
 
