@@ -43,22 +43,13 @@ view: products {
     type: string
     sql: ${TABLE}.sku ;;
   }
+  filter: selected_department {
+    suggest_dimension: department
+  }
+  dimension: product_type {
+#      SQL: CASE WHEN {% condition selected_department %} '' {% endcondition %} THEN ${department} WHEN {% condition selected_department %} ${department} {% endcondition %} THEN ${category} END;;
+  }
 
-filter: selected_department {
-  suggest_dimension: department
-}
-
-#
-#   dimension: product_type
-#     sql: |
-#       CASE
-#       WHEN {% condition selected_department %} '' {% endcondition %}
-#       THEN ${department}
-#
-#       WHEN {% condition selected_department %} ${department} {% endcondition %}
-#       THEN ${category}
-#
-#       END
 
   measure: count {
     type: count
