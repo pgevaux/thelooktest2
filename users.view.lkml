@@ -49,6 +49,7 @@ view: users {
   dimension: gender {
     type: string
     sql: ${TABLE}.gender ;;
+    drill_fields: [city,age,state]
   }
   dimension: male {
     type: yesno

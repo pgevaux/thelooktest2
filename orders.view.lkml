@@ -31,6 +31,21 @@ view: orders {
     # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
+#   filter: selected_department
+#     suggest_dimension: department
+#
+#   dimension: product_type
+#     sql: |
+#       CASE
+#       WHEN {% condition selected_department %} '' {% endcondition %}
+#       THEN ${department}
+#
+#       WHEN {% condition selected_department %} ${department} {% endcondition %}
+#       THEN ${category}
+#
+#       END
+
+
 
   measure: count {
     type: count
