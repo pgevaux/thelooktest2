@@ -10,11 +10,13 @@ view: products {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
+    drill_fields: [category]
   }
 
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    drill_fields: [brand]
   }
 
   dimension: department {
@@ -41,6 +43,22 @@ view: products {
     type: string
     sql: ${TABLE}.sku ;;
   }
+
+filter: selected_department {
+  suggest_dimension: department
+}
+
+#
+#   dimension: product_type
+#     sql: |
+#       CASE
+#       WHEN {% condition selected_department %} '' {% endcondition %}
+#       THEN ${department}
+#
+#       WHEN {% condition selected_department %} ${department} {% endcondition %}
+#       THEN ${category}
+#
+#       END
 
   measure: count {
     type: count
