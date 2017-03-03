@@ -33,9 +33,27 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
-  dimension: sale_price {
-    type: number
+  measure: sale_price_gbp {
+    type: sum
     sql: ${TABLE}.sale_price ;;
+    value_format_name: gbp
+  }
+
+  dimension: sale_price_local_convert {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.sale_price*${currency_conversion.currency_conversion} ;;
+  }
+
+  measure: sale_price_local {
+    type: sum
+    sql: ${sale_price_local_convert} ;;
+    value_format_name: decimal_2
+  }
+
+  dimension: source_currency {
+    type: string
+    sql: "GBP" ;;
   }
 
   measure: count {
