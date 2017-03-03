@@ -32,3 +32,5 @@ explore: order_items {
     relationship: many_to_one
   }
 }
+
+explore: currency_conversion {}
