@@ -38,6 +38,7 @@ view: currency_conversion {
   }
 
   dimension: source {
+    hidden:  yes
     type: string
     sql: ${TABLE}.source ;;
   }
