@@ -9,13 +9,6 @@ include: "*.dashboard"
 explore: order_items {
   label: "Customer Orders"
 
-  always_filter: {
-    filters: {
-      field: currency_conversion.currency_code
-      value: "GBP"
-    }
-  }
-
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
@@ -38,6 +31,12 @@ explore: order_items {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
+  }
+
+  join: user_lifetime_facts {
+    type: inner
+    sql_on: ${users.id} = ${user_lifetime_facts.user_id} ;;
+    relationship: one_to_one
   }
 
   join: currency_conversion {

@@ -21,6 +21,14 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: is_ytd {
+    type: yesno
+    sql: year(${created_date}) = year(current_date) ;;
+  }
+
+  dimension: year_to_date {}
+
+
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
